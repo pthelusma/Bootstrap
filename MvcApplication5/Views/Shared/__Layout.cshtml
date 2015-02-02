@@ -3,8 +3,44 @@
 <head>
     <title>@ViewBag.Title</title>
     <link href="Scripts/Bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
-    <script src="Scripts/Bootstrap/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-2.1.1.min.js" ></script>
+    <script type="text/javascript" src="Scripts/Bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Views/ReCaptcha.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+
+            ReCaptcha.init();
+
+            $("#btnSubmit").click(function () {
+
+                ReCaptcha.storeRecaptchaParameters();
+
+                if (ReCaptcha.isValidResponse()) {
+                    if (ReCaptcha.isValidReCaptcha()) {
+                        alert("Success");
+
+                        $.ajax({
+                            type: "POST",
+                            url: "/Home/SendEmail",
+                            async: false,
+                            success: function (resp) {
+                                alert("Send email!");
+                            }
+                        });
+                    } else {
+                        alert("Failure");
+                    }
+                } else {
+                    alert("Please provide a response");
+                }
+            });
+        });
+
+
+    </script>
     <style>
         html {
           position: relative;
@@ -79,6 +115,7 @@
                                     <li><a href="#">Snow Plowing and Sanding</a></li>
                                 </ul>
                             </li>
+                            <li><a href="#">Gallery</a></li>
                             <li><a href="#">Testimonials</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Materials<span class="caret"></span></a>
@@ -93,9 +130,6 @@
                             <li><a href="#">About Us</a></li>
                             <li><a href="#">Contact Us</a></li>
                         </ul>
-                        <form class="navbar-form navbar-right">
-                            <input type="text" class="form-control" placeholder="Search...">
-                        </form>
                     </div>
                 </div>
             </nav>
@@ -103,25 +137,22 @@
     </div>
     <div class="container">
         <div class="container row">
-            <div class="col-lg-8">
+            <div class="col-lg-9">
                 @RenderBody()
             </div>
-            <div class="col-lg-3 col-lg-offset-1">
+            <div class="col-lg-3">
                 <div class="sidebar-module sidebar-module-inset">
                     <address class="vcard">
-                        <a class="url fn org" href="http://technorati.com/">Technorati</a>
                         <span class="adr" style="display:block">
-                            <span class="street-address">665 3rd St.</span>
-                            <span class="extended-address">Suite 207</span>
+                            <span class="street-address">25 Hale True Road</span>
                             <span style="display:block">
-                                <span class="locality">San Francisco</span>,
-                                <span class="region">CA</span>
-                                <span class="postal-code">94107</span>
+                                <span class="locality">Sandown</span>,
+                                <span class="region">NH</span>
+                                <span class="postal-code">03873</span>
                             </span>
+                            <span class="region"><a href="mailto:John@nhexcavation.com">John@nhexcavation.com</a></span>
                         </span>
                     </address>
-                </div>
-                <div class="sidebar-module">
                     <ol class="list-unstyled">
                         <li>
                             <iframe id="twitter-widget-1" scrolling="no" frameborder="0" allowtransparency="true" src="http://platform.twitter.com/widgets/follow_button.93c9003dd72a6cd9f4fee1e5eb3546c1.en.html#_=1417993544249&amp;id=twitter-widget-1&amp;lang=en&amp;screen_name=nhexcavation&amp;show_count=true&amp;show_screen_name=true&amp;size=m" class="twitter-follow-button twitter-follow-button" title="Twitter Follow Button" data-twttr-rendered="true" style="width: 237px; height: 20px;"></iframe>
@@ -130,6 +161,64 @@
                             <iframe src="//www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2Fzuck&amp;width&amp;height=21&amp;colorscheme=light&amp;layout=button_count&amp;show_faces=false&amp;share=true" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowtransparency="true"></iframe>
                         </li>
                     </ol>
+                </div>
+                <div class="sidebar-module">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="FirstName" placeholder="First Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="LastName" placeholder="Last Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <input type="email" class="form-control" id="Email" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <input type="tel" class="form-control" id="PhoneNumber" placeholder="Phone Number">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <select class="form-control">
+                                    <option value=0 selected>-- Contact Method --</option>
+                                    <option value=1>Email</option>
+                                    <option value=2>Phone</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <select class="form-control">
+                                    <option value=0 selected>-- How did you find us? --</option>
+                                    <option value=1>Referral</option>
+                                    <option value=2>Google</option>
+                                    <option value=3>Yahoo!</option>
+                                    <option value=4>Bing</option>
+                                    <option value=5>Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <textarea class="form-control" rows="5" id="Message" placeholder="Message"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div id="ReCaptcha"></div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary" id="btnSubmit">Send</button>
+                    </form>
+
+
                 </div>
             </div>
         </div>
