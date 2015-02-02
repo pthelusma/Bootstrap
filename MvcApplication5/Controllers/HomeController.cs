@@ -30,7 +30,7 @@ namespace MvcApplication5.Controllers
             return View();
         }
 
-        public ActionResult Submit(string remoteip, string challenge, string response)
+        public ActionResult Submit(string clientip, string challenge, string response)
         {
 
             HttpClient client = new HttpClient();
@@ -38,7 +38,7 @@ namespace MvcApplication5.Controllers
             string privatekey = "6LcXkfUSAAAAAGQO8dXYce09FzVPyMRoCK2ONzHo";
 
             var values = new List<KeyValuePair<string, string>>();
-            values.Add(new KeyValuePair<string, string>("remoteip", HttpUtility.UrlEncode(remoteip)));
+            values.Add(new KeyValuePair<string, string>("remoteip", HttpUtility.UrlEncode(clientip)));
             values.Add(new KeyValuePair<string, string>("privatekey", HttpUtility.UrlEncode(privatekey)));
             values.Add(new KeyValuePair<string, string>("challenge", HttpUtility.UrlEncode(challenge)));
             values.Add(new KeyValuePair<string, string>("response", HttpUtility.UrlEncode(response)));

@@ -9,8 +9,7 @@
 
     var createReCaptcha = function () {
         Recaptcha.create("6LcXkfUSAAAAACBhoS9s68a6Ivu_kCfoo8RU1-hg", "ReCaptcha", {
-            theme: "red",
-            callback: Recaptcha.focus_response_field
+            theme: "red"
         });
     }
 
@@ -34,13 +33,13 @@
 
     function isValidReCaptcha() {
 
-        var remoteip;
+        var clientip;
 
         var success = false;
 
         $.getJSON("http://jsonip.com",
             function (res) {
-                remoteip = res.ip;
+                clientip = res.ip;
             });
 
         $.ajax({
@@ -48,7 +47,7 @@
             url: "/Home/Submit",
             async: false,
             data: {
-                remoteip: remoteip,
+                remoteip: clientip,
                 challenge: Recaptcha.get_challenge(),
                 response: Recaptcha.get_response()
             },

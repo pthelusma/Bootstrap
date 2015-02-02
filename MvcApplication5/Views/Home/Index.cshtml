@@ -2,4 +2,74 @@
     ViewBag.Title = "Home Page";
 }
 
-Hello World
+<script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+<script type="text/javascript" src="~/Scripts/Views/ReCaptcha.js"></script>
+<script type="text/javascript" src="~/Scripts/Views/Index.js"></script>
+
+<div class="container">
+    <div class="container row">
+        <div class="col-lg-9">
+           Hello
+        </div>
+        <div class="col-lg-3">
+            <div class="sidebar-module">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="FirstName" placeholder="First Name" autofocus>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="LastName" placeholder="Last Name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="email" class="form-control" id="Email" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="tel" class="form-control" id="PhoneNumber" placeholder="Phone Number">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <select class="form-control">
+                                <option value=0 selected>-- Contact Method --</option>
+                                <option value=1>Email</option>
+                                <option value=2>Phone</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <select class="form-control">
+                                <option value=0 selected>-- How did you find us? --</option>
+                                <option value=1>Referral</option>
+                                <option value=2>Google</option>
+                                <option value=3>Yahoo!</option>
+                                <option value=4>Bing</option>
+                                <option value=5>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <textarea class="form-control" rows="5" id="Message" placeholder="Message"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div id="ReCaptcha"></div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="btnSubmit">Send</button>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
