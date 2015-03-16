@@ -1,56 +1,80 @@
-﻿<div class="navbar-wrapper">
-    <div class="container">
-        <div class="container row">
-            <div class="col-sm-9" >
-                <img id="logo" src="~/Content/select-excavation.png" />
-            </div>
-            <div class="col-sm-3">
-                @Html.Partial("ContactInformation")
-            </div>
-            </div>
-                
-                
-                <nav class="navbar navbar-inverse" role="navigation">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="#">Select Excavation</a>
-                        </div>
-                        <div id="navbar" class="collapse navbar-collapse">
-                            <ul class="nav navbar-nav">
-                                <li class="active"><a href="#">Home</a></li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Services<span class="caret"></span></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">NH Septic Services</a></li>
-                                        <li><a href="#">Hardscapes</a></li>
-                                        <li><a href="#">Excavation</a></li>
-                                        <li><a href="#">Landscaping</a></li>
-                                        <li><a href="#">Snow Plowing and Sanding</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Gallery</a></li>
-                                <li><a href="#">Testimonials</a></li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Materials<span class="caret"></span></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">Bark Mulch</a></li>
-                                        <li><a href="#">Soil</a></li>
-                                        <li><a href="#">Crushed Stone</a></li>
-                                        <li><a href="#">Decorative Stone</a></li>
-                                        <li><a href="#">Gravel and Fill</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Contact Us</a></li>
-                            </ul>
-                        </div>
+﻿<header>
+    <div class="navbar-wrapper">
+        <div class="container">
+            <nav class="navbar navbar-default">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a href='@Url.Action("Index")'>
+                            <img src='@Url.Content("~/Content/imageedit_2_3869421679.gif")' alt="Home Page">
+                        </a>
                     </div>
-                </nav>
-            </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                @Html.ActionLink("Home", "Index")
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Services<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            @Html.ActionLink("Septic Services NH", "Septic")
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Hardscapes", "Hardscapes")
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Excavation", "Excavation")
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Landscaping", "Landscaping")
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Snow Plowing & Sanding", "Plowing")
+                                        </li>
+                                </ul>
+                            </li>
+                            <li>@Html.ActionLink("Gallery", "Gallery")</li>
+                            <li>@Html.ActionLink("Testimonials", "Testimonials")</li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Materials<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            @Html.ActionLink("Bark Mulch", "Mulch")
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Soil", "Soil")
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Crushed Stone", "Crushed")
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Decorative Stone", "Decorative")
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Gravel and Fill", "Gravel")
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Order Materials", "Materials")
+                                        </li>
+                                </ul>
+                            </li>
+                            <li>
+                                @Html.ActionLink("About Us", "About")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Contact Us", "Contact")
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
         </div>
+    </div>
+</header>

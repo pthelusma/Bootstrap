@@ -30,6 +30,16 @@ namespace MvcApplication5.Controllers
             return View();
         }
 
+        public ActionResult Testimonials()
+        {
+            return View();
+        }
+
+        public ActionResult Gallery()
+        {
+            return View();
+        }
+
         public ActionResult Submit(string clientip, string challenge, string response)
         {
 

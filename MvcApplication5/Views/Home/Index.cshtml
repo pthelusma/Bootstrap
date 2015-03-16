@@ -1,75 +1,101 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
-
-<script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+﻿<script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
 <script type="text/javascript" src="~/Scripts/Views/ReCaptcha.js"></script>
 <script type="text/javascript" src="~/Scripts/Views/Index.js"></script>
-
-<div class="container">
-    <div class="container row">
-        <div class="col-lg-9">
-           Hello
-        </div>
-        <div class="col-lg-3">
-            <div class="sidebar-module">
-                <form class="form-horizontal">
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <input type="text" class="form-control" id="FirstName" placeholder="First Name" autofocus>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <input type="text" class="form-control" id="LastName" placeholder="Last Name">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <input type="email" class="form-control" id="Email" placeholder="Email">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <input type="tel" class="form-control" id="PhoneNumber" placeholder="Phone Number">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <select class="form-control">
-                                <option value=0 selected>-- Contact Method --</option>
-                                <option value=1>Email</option>
-                                <option value=2>Phone</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <select class="form-control">
-                                <option value=0 selected>-- How did you find us? --</option>
-                                <option value=1>Referral</option>
-                                <option value=2>Google</option>
-                                <option value=3>Yahoo!</option>
-                                <option value=4>Bing</option>
-                                <option value=5>Other</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <textarea class="form-control" rows="5" id="Message" placeholder="Message"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <div id="ReCaptcha"></div>
-                        </div>
-                    </div>
-                    <button type="button" class="btn btn-primary" id="btnSubmit">Send</button>
-                </form>
-
-
+<div class="container border">
+    <div class="col-sm-9">
+        <div class="content">
+            <h2>Services</h2>
+            <div class="row">
+                <div class="col-lg-4" style="text-align:center">
+                    <img class="img-circle" src="~/Content/icon-excavation.jpg" alt="Excavation" style="width: 120px; height: 120px;">
+                    <h4>Excavation</h4>
+                    <p>Let us preserve your new home lot and provde precise and thought out excavation, allowing you to keep the natural beauty of your home's lot intact.</p>
+                    <p><a class="btn btn-default" href="#" role="button">Learn more »</a></p>
+                </div><!-- /.col-lg-4 -->
+                <div class="col-lg-4" style="text-align:center">
+                    <img class="img-circle" src="~/Content/icon-hardscapes.jpg" alt="Hardscapes" style="width: 120px; height: 120px;">
+                    <h4>Hardscapes</h4>
+                    <p>Paver driveways, retaining walls and more...Select Excavation and Landscaping uses top quality materials from Belgard, Tech-Bloc and Allan Block.</p>
+                    <p><a class="btn btn-default" href="#" role="button">Learn more »</a></p>
+                </div><!-- /.col-lg-4 -->
+                <div class="col-lg-4" style="text-align:center">
+                    <img class="img-circle" src="~/Content/icon-mulch.jpg" alt="Mulch" style="width: 120px; height: 120px;">
+                    <h4>Mulch, Stone and Materials</h4>
+                    <p>Order bark mulch, stone, gravel and other landscaping materials from the comfort of your own home at delivery prices that can't be beat</p>
+                    <p><a class="btn btn-default" href="#" role="button">Learn more »</a></p>
+                </div><!-- /.col-lg-4 -->
+            </div>
+            <div class="row">
+                <div class="col-lg-offset-2 col-lg-4" style="text-align:center">
+                    <img class="img-circle" src="~/Content/icon-landscapes.jpg" alt="Landscapes" style="width: 120px; height: 120px;">
+                    <h4>Landscapes</h4>
+                    <p>Beautiful, professional landscaping is our specialty. From sharp edging to shrub, mulch and grass installation, we'll get the job done right.</p>
+                    <p><a class="btn btn-default" href="#" role="button">Learn more »</a></p>
+                </div><!-- /.col-lg-4 -->
+                <div class="col-lg-4 col-lg" style="text-align:center">
+                    <img class="img-circle" src="~/Content/icon-plowing.jpg" alt="Plowing" style="width: 120px; height: 120px;">
+                    <h4>Dependable Plowing</h4>
+                    <p>Competitive pricing and reliable service are what makes Select Excavation and Landscaping's winter services a step above the competition.</p>
+                    <p><a class="btn btn-default" href="#" role="button">Learn more »</a></p>
+                </div><!-- /.col-lg-4 -->
+            </div>
+            <h2>Materials</h2>
+            <div class="row">
+                <div class="col-lg-3">
+                    <h4>Stone</h4>
+                    <ul>
+                        <li>3/8" Economy Crushed</li>
+                        <li>3/4" Economy Crushed</li>
+                        <li>1-1 1/2" Economy Crushed</li>
+                        <li>3/8" Blue Stone</li>
+                        <li>3/4" Blue Stone</li>
+                        <li>1-1 1/2" Blue Stone</li>
+                        <li>Erosion Stone</li>
+                        <li>Stone Dust</li>
+                    </ul>
+                </div><!-- /.col-lg-4 -->
+                <div class="col-lg-3">
+                    <h4>Bark Mulch</h4>
+                    <ul>
+                        <li>Hemlock</li>
+                        <li>Color Enhanced Red</li>
+                        <li>Dark Bark</li>
+                        <li>Pine/Spruce</li>
+                        <li>Playground Chips</li>
+                    </ul>    
+                </div>
+                <div class="col-lg-3">
+                    <h4>Soil</h4>
+                    <ul>
+                        <li>Screened Loam</li>
+                        <li>Compost</li>
+                        <li>Clean Sand Fill</li>
+                        <li>Sand Stone</li>
+                        <li>Washed Sand</li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h4>Decorative Stone</h4>
+                    <ul>
+                        <li>3/8" Multi-Tan</li>
+                        <li>3/4" Multi-Tan</li>
+                        <li>1-1 1/2" Multi-Tan</li>
+                        <li>White Stone</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <p style="text-align:center"><a class=" btn btn-lg btn-success" href="#" role="button">View Pricing</a></p>
+                </div>
+                <div class="col-lg-6">
+                    <p style="text-align:center"><a class="btn btn-lg btn-success" href="#" role="button">Place Order</a></p>
+                </div>
             </div>
         </div>
+    </div>
+    <div class="col-sm-3">
+        @Html.Partial("ContactInformation")
+        @Html.Partial("ReCaptcha")
     </div>
 </div>

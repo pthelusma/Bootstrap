@@ -191,6 +191,35 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Contact.css" />
+    <Content Include="Content\icon-landscapes.jpg" />
+    <Content Include="Content\icon-hardscapes.jpg" />
+    <Content Include="Content\icon-plowing.jpg" />
+    <Content Include="Content\bark-mulch-delivery-options.jpg" />
+    <Content Include="Content\button-n.gif" />
+    <Content Include="Content\button.gif" />
+    <Content Include="Content\culvert_41021PM.JPG" />
+    <Content Include="Content\designedbyday-news.gif" />
+    <Content Include="Content\email-banner.jpg" />
+    <Content Include="Content\icon-excavation.jpg" />
+    <Content Include="Content\excavator.gif" />
+    <Content Include="Content\fd-is-now-select.jpg" />
+    <Content Include="Content\gradientBG.jpg" />
+    <Content Include="Content\gray-divide.gif" />
+    <Content Include="Content\imageedit_2_3869421679.gif" />
+    <Content Include="Content\left.gif" />
+    <Content Include="Content\little-green-button.jpg" />
+    <Content Include="Content\icon-mulch.jpg" />
+    <Content Include="Content\nav-bar.jpg" />
+    <Content Include="Content\news-feed.jpg" />
+    <Content Include="Content\nh-excavation-facebook.gif" />
+    <Content Include="Content\nh-excavation-rss.gif" />
+    <Content Include="Content\nh-excavation-twitter.gif" />
+    <Content Include="Content\nhexcavation.jpg" />
+    <Content Include="Content\pause.gif" />
+    <Content Include="Content\pixel.gif" />
+    <Content Include="Content\play.gif" />
+    <Content Include="Content\right.gif" />
     <Content Include="Content\select-excavation.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -248,6 +277,29 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Blueimp\css\blueimp-gallery-indicator.css" />
+    <Content Include="Scripts\Blueimp\css\blueimp-gallery-video.css" />
+    <Content Include="Scripts\Blueimp\css\blueimp-gallery.css" />
+    <Content Include="Scripts\Blueimp\css\blueimp-gallery.min.css" />
+    <Content Include="Scripts\Blueimp\css\demo.css" />
+    <Content Include="Scripts\Blueimp\img\error.png" />
+    <Content Include="Scripts\Blueimp\img\error.svg" />
+    <Content Include="Scripts\Blueimp\img\loading.gif" />
+    <Content Include="Scripts\Blueimp\img\play-pause.png" />
+    <Content Include="Scripts\Blueimp\img\play-pause.svg" />
+    <Content Include="Scripts\Blueimp\img\video-play.png" />
+    <Content Include="Scripts\Blueimp\img\video-play.svg" />
+    <Content Include="Scripts\Blueimp\js\blueimp-gallery-fullscreen.js" />
+    <Content Include="Scripts\Blueimp\js\blueimp-gallery-indicator.js" />
+    <Content Include="Scripts\Blueimp\js\blueimp-gallery-video.js" />
+    <Content Include="Scripts\Blueimp\js\blueimp-gallery-vimeo.js" />
+    <Content Include="Scripts\Blueimp\js\blueimp-gallery-youtube.js" />
+    <Content Include="Scripts\Blueimp\js\blueimp-gallery.js" />
+    <Content Include="Scripts\Blueimp\js\blueimp-gallery.min.js" />
+    <Content Include="Scripts\Blueimp\js\blueimp-helper.js" />
+    <Content Include="Scripts\Blueimp\js\demo.js" />
+    <Content Include="Scripts\Blueimp\js\jquery.blueimp-gallery.js" />
+    <Content Include="Scripts\Blueimp\js\jquery.blueimp-gallery.min.js" />
     <Content Include="Scripts\Bootstrap\css\bootstrap-theme.css.map" />
     <Content Include="Scripts\Bootstrap\css\bootstrap.css.map" />
     <Content Include="Scripts\Bootstrap\fonts\glyphicons-halflings-regular.eot" />
@@ -322,9 +374,13 @@
     <Content Include="Views\Shared\Footer.cshtml" />
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Shared\ContactInformation.cshtml" />
+    <Content Include="Views\Shared\ReCaptcha.cshtml" />
+    <Content Include="Views\Home\Gallery.cshtml" />
+    <Content Include="Views\Home\Testimonials.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\Thumbnails\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -45,3 +45,32 @@ footer {
     border-radius: 4px;
     margin: 15px 0px 15px;
 }
+
+.navbar {
+    margin-bottom: 0px;
+    min-height:50px;
+}
+
+.content {
+    margin-top:15px;
+    margin-bottom:15px;
+}
+
+.navbar img{
+    width:60%;
+    height:60%;
+}
+
+.navbar-nav>li>a {
+    line-height: 50px;
+}
+
+.navbar-default{
+    background-color:white;
+    border-color: white;
+}
+
+ul, li {
+  list-style: none;
+  list-style-type: none;
+}
