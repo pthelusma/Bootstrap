@@ -9,7 +9,7 @@
 
     var createReCaptcha = function () {
         Recaptcha.create("6LcXkfUSAAAAACBhoS9s68a6Ivu_kCfoo8RU1-hg", "ReCaptcha", {
-            theme: "red"
+            theme: "white"
         });
     }
 
@@ -55,7 +55,7 @@
                 if (resp.result === "true") {
                     success = true;
                 } else {
-                    recreateRecaptcha();
+                    //recreateRecaptcha();
                 }
             }
         });
@@ -67,6 +67,7 @@
         init: init,
         isValidReCaptcha: isValidReCaptcha,
         isValidResponse: isValidResponse,
-        storeRecaptchaParameters: storeRecaptchaParameters
+        storeRecaptchaParameters: storeRecaptchaParameters,
+        recreateRecaptcha: recreateRecaptcha
     };
 })();

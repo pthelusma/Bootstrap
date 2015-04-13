@@ -39,11 +39,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -60,9 +69,6 @@
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -181,6 +187,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Communication.cs">
+      <DependentUpon>NHExcavationDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -188,9 +197,29 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="NHExcavationDBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NHExcavationDBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NHExcavationDBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NHExcavationDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NHExcavationDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NHExcavationDBModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\NHExcavationDB.mdf" />
+    <Content Include="App_Data\NHExcavationDB_log.ldf">
+      <DependentUpon>NHExcavationDB.mdf</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap-multiselect.css" />
     <Content Include="Content\Contact.css" />
     <Content Include="Content\icon-landscapes.jpg" />
     <Content Include="Content\icon-hardscapes.jpg" />
@@ -206,7 +235,7 @@
     <Content Include="Content\fd-is-now-select.jpg" />
     <Content Include="Content\gradientBG.jpg" />
     <Content Include="Content\gray-divide.gif" />
-    <Content Include="Content\imageedit_2_3869421679.gif" />
+    <Content Include="Content\site-logo.gif" />
     <Content Include="Content\left.gif" />
     <Content Include="Content\little-green-button.jpg" />
     <Content Include="Content\icon-mulch.jpg" />
@@ -221,6 +250,7 @@
     <Content Include="Content\play.gif" />
     <Content Include="Content\right.gif" />
     <Content Include="Content\select-excavation.png" />
+    <Content Include="Content\site-logo60pct.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -277,6 +307,414 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\Gallery\1-1-2-crushed-economy.jpg" />
+    <Content Include="Images\Gallery\103x44-whitetab.gif" />
+    <Content Include="Images\Gallery\231-Wash-Pond---September-2012---1.jpg" />
+    <Content Include="Images\Gallery\231-Wash-Pond---September-2012---2.jpg" />
+    <Content Include="Images\Gallery\231-Wash-Pond---September-2012---3.jpg" />
+    <Content Include="Images\Gallery\231-Wash-Pond---September-2012---4.jpg" />
+    <Content Include="Images\Gallery\231-Wash-Pond---September-2012---5.jpg" />
+    <Content Include="Images\Gallery\3-4-crushed-economy.jpg" />
+    <Content Include="Images\Gallery\3-8-blue-stone.jpg" />
+    <Content Include="Images\Gallery\3-8-crushed-economy.jpg" />
+    <Content Include="Images\Gallery\424x283-fdc-backhoe.gif" />
+    <Content Include="Images\Gallery\600x64-content-box-gra.jpg" />
+    <Content Include="Images\Gallery\85x85-fdc-lotexcavation.jpg" />
+    <Content Include="Images\Gallery\85x85-fdc-nhhardscapes.jpg" />
+    <Content Include="Images\Gallery\85x85-fdc-nhhomeadditions.jpg" />
+    <Content Include="Images\Gallery\85x85-fdc-nhplowing.jpg" />
+    <Content Include="Images\Gallery\bark-mulch-delivery.jpg" />
+    <Content Include="Images\Gallery\clean-sand-fill.jpg" />
+    <Content Include="Images\Gallery\compost-soil.jpg" />
+    <Content Include="Images\Gallery\con-kw-misc048.jpg" />
+    <Content Include="Images\Gallery\con-kw-misc049.jpg" />
+    <Content Include="Images\Gallery\con-kw-misc050.jpg" />
+    <Content Include="Images\Gallery\con-kw-misc051.jpg" />
+    <Content Include="Images\Gallery\con-kw-misc052.jpg" />
+    <Content Include="Images\Gallery\con-kw-misc053.jpg" />
+    <Content Include="Images\Gallery\con-kw-misc054.jpg" />
+    <Content Include="Images\Gallery\con-kw-misc058.jpg" />
+    <Content Include="Images\Gallery\con-kw-misc080.jpg" />
+    <Content Include="Images\Gallery\con-kw-misc081.jpg" />
+    <Content Include="Images\Gallery\con-kw-misc082.jpg" />
+    <Content Include="Images\Gallery\cordwood%281%29.jpg" />
+    <Content Include="Images\Gallery\cordwood.jpg" />
+    <Content Include="Images\Gallery\dark-mulch.jpg" />
+    <Content Include="Images\Gallery\erosion-stone.jpg" />
+    <Content Include="Images\Gallery\garage-18.jpg" />
+    <Content Include="Images\Gallery\hemlock-mulch.jpg" />
+    <Content Include="Images\Gallery\icon_animated_busy2_2.gif" />
+    <Content Include="Images\Gallery\icon_lock.gif" />
+    <Content Include="Images\Gallery\ico_delete.png" />
+    <Content Include="Images\Gallery\ico_new.png" />
+    <Content Include="Images\Gallery\ico_print.jpg" />
+    <Content Include="Images\Gallery\ico_tack.gif" />
+    <Content Include="Images\Gallery\ico_top.gif" />
+    <Content Include="Images\Gallery\IMG_0290.JPG" />
+    <Content Include="Images\Gallery\IMG_0299.JPG" />
+    <Content Include="Images\Gallery\IMG_0306.JPG" />
+    <Content Include="Images\Gallery\IMG_0312.JPG" />
+    <Content Include="Images\Gallery\IMG_0324.JPG" />
+    <Content Include="Images\Gallery\IMG_0414.JPG" />
+    <Content Include="Images\Gallery\IMG_3121.JPG" />
+    <Content Include="Images\Gallery\irrigation.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-001.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-002.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-003.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-004.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-005.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-006.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-007.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-008.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-009.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-010.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-011.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-012.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-013.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-014.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-015.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-016.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-017.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-018.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-019.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-020.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-021.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-022.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-023.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-024.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-025.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-026.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-027.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-028.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-029.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-030.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-031.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-032.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-033.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-034.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-035.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-036.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-037.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-038.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-039.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-040.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-041.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-042.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-043.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-044.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-045.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-046.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-047.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-048.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-049.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-050.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-051.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-052.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-053.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-054.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-055.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-056.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-057.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-058.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-059.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-060.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-061.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-062.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-063.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-064.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-065.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-066.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-067.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-068.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-069.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-070.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-071.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-072.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-073.jpg" />
+    <Content Include="Images\Gallery\Leveling-backyard-4.2010-074.jpg" />
+    <Content Include="Images\Gallery\Multi-Tan-stone.jpg" />
+    <Content Include="Images\Gallery\P1000338.JPG" />
+    <Content Include="Images\Gallery\P1000339.JPG" />
+    <Content Include="Images\Gallery\P1000340.JPG" />
+    <Content Include="Images\Gallery\P1000341.JPG" />
+    <Content Include="Images\Gallery\P1000342.JPG" />
+    <Content Include="Images\Gallery\P1000343.JPG" />
+    <Content Include="Images\Gallery\P1000344.JPG" />
+    <Content Include="Images\Gallery\P1000345.JPG" />
+    <Content Include="Images\Gallery\P1000346.JPG" />
+    <Content Include="Images\Gallery\P1000347.JPG" />
+    <Content Include="Images\Gallery\P1000348.JPG" />
+    <Content Include="Images\Gallery\P1000349.JPG" />
+    <Content Include="Images\Gallery\P1000357.JPG" />
+    <Content Include="Images\Gallery\P1000358.JPG" />
+    <Content Include="Images\Gallery\P1000359.JPG" />
+    <Content Include="Images\Gallery\P1000360.JPG" />
+    <Content Include="Images\Gallery\P1000361.JPG" />
+    <Content Include="Images\Gallery\P1000362.JPG" />
+    <Content Include="Images\Gallery\P1000364.JPG" />
+    <Content Include="Images\Gallery\P1000365.JPG" />
+    <Content Include="Images\Gallery\P1000366.JPG" />
+    <Content Include="Images\Gallery\P1000367.JPG" />
+    <Content Include="Images\Gallery\P1000368.JPG" />
+    <Content Include="Images\Gallery\P1000374.JPG" />
+    <Content Include="Images\Gallery\P1000375.JPG" />
+    <Content Include="Images\Gallery\P1000376.JPG" />
+    <Content Include="Images\Gallery\P1000377.JPG" />
+    <Content Include="Images\Gallery\P1000378.JPG" />
+    <Content Include="Images\Gallery\P1000379.JPG" />
+    <Content Include="Images\Gallery\P1000380.JPG" />
+    <Content Include="Images\Gallery\P1000381.JPG" />
+    <Content Include="Images\Gallery\P1000382.JPG" />
+    <Content Include="Images\Gallery\P1000384.JPG" />
+    <Content Include="Images\Gallery\P1000385.JPG" />
+    <Content Include="Images\Gallery\P1000388.JPG" />
+    <Content Include="Images\Gallery\P1000389.JPG" />
+    <Content Include="Images\Gallery\P1000390.JPG" />
+    <Content Include="Images\Gallery\P1000391.JPG" />
+    <Content Include="Images\Gallery\P1000392.JPG" />
+    <Content Include="Images\Gallery\P1000393.JPG" />
+    <Content Include="Images\Gallery\P1000394.JPG" />
+    <Content Include="Images\Gallery\P1000395.JPG" />
+    <Content Include="Images\Gallery\P1000396.JPG" />
+    <Content Include="Images\Gallery\P1000397.JPG" />
+    <Content Include="Images\Gallery\P1000398.JPG" />
+    <Content Include="Images\Gallery\P1000399.JPG" />
+    <Content Include="Images\Gallery\P1000400.JPG" />
+    <Content Include="Images\Gallery\P1000401.JPG" />
+    <Content Include="Images\Gallery\P1000402.JPG" />
+    <Content Include="Images\Gallery\P1000405.JPG" />
+    <Content Include="Images\Gallery\P1000406.JPG" />
+    <Content Include="Images\Gallery\P1000407.JPG" />
+    <Content Include="Images\Gallery\P1000408.JPG" />
+    <Content Include="Images\Gallery\P1000409.JPG" />
+    <Content Include="Images\Gallery\P1000410.JPG" />
+    <Content Include="Images\Gallery\P1000412.JPG" />
+    <Content Include="Images\Gallery\P1000413.JPG" />
+    <Content Include="Images\Gallery\P1000414.JPG" />
+    <Content Include="Images\Gallery\P1000415.JPG" />
+    <Content Include="Images\Gallery\P1000416.JPG" />
+    <Content Include="Images\Gallery\P1000417.JPG" />
+    <Content Include="Images\Gallery\P1000418.JPG" />
+    <Content Include="Images\Gallery\P1000419.JPG" />
+    <Content Include="Images\Gallery\P1000420.JPG" />
+    <Content Include="Images\Gallery\P1000421.JPG" />
+    <Content Include="Images\Gallery\P1000422.JPG" />
+    <Content Include="Images\Gallery\P1000423.JPG" />
+    <Content Include="Images\Gallery\P1000424.JPG" />
+    <Content Include="Images\Gallery\P1000426.JPG" />
+    <Content Include="Images\Gallery\P1000427.JPG" />
+    <Content Include="Images\Gallery\P1000428.JPG" />
+    <Content Include="Images\Gallery\P1000429.JPG" />
+    <Content Include="Images\Gallery\P1000430.JPG" />
+    <Content Include="Images\Gallery\P1000431.JPG" />
+    <Content Include="Images\Gallery\P1000432.JPG" />
+    <Content Include="Images\Gallery\P1000435.JPG" />
+    <Content Include="Images\Gallery\P1000436.JPG" />
+    <Content Include="Images\Gallery\P1000437.JPG" />
+    <Content Include="Images\Gallery\P1000438.JPG" />
+    <Content Include="Images\Gallery\P1000439.JPG" />
+    <Content Include="Images\Gallery\P1000440.JPG" />
+    <Content Include="Images\Gallery\P1000441.JPG" />
+    <Content Include="Images\Gallery\P1000442.JPG" />
+    <Content Include="Images\Gallery\P1000443.JPG" />
+    <Content Include="Images\Gallery\P1000444.JPG" />
+    <Content Include="Images\Gallery\P1000445.JPG" />
+    <Content Include="Images\Gallery\P1000446.JPG" />
+    <Content Include="Images\Gallery\P1000447.JPG" />
+    <Content Include="Images\Gallery\P1000448.JPG" />
+    <Content Include="Images\Gallery\P1000449.JPG" />
+    <Content Include="Images\Gallery\P1000450.JPG" />
+    <Content Include="Images\Gallery\P1000451.JPG" />
+    <Content Include="Images\Gallery\P1000452.JPG" />
+    <Content Include="Images\Gallery\P1000453.JPG" />
+    <Content Include="Images\Gallery\P1000454.JPG" />
+    <Content Include="Images\Gallery\P1000455.JPG" />
+    <Content Include="Images\Gallery\P1000456.JPG" />
+    <Content Include="Images\Gallery\P1000457.JPG" />
+    <Content Include="Images\Gallery\P1000460.JPG" />
+    <Content Include="Images\Gallery\P1000461.JPG" />
+    <Content Include="Images\Gallery\P1000462.JPG" />
+    <Content Include="Images\Gallery\P1000463.JPG" />
+    <Content Include="Images\Gallery\P1000464.JPG" />
+    <Content Include="Images\Gallery\P1000465.JPG" />
+    <Content Include="Images\Gallery\P1000466.JPG" />
+    <Content Include="Images\Gallery\P1000467.JPG" />
+    <Content Include="Images\Gallery\P1000468.JPG" />
+    <Content Include="Images\Gallery\P1000469.JPG" />
+    <Content Include="Images\Gallery\P1000470.JPG" />
+    <Content Include="Images\Gallery\P1000492.JPG" />
+    <Content Include="Images\Gallery\P1000494.JPG" />
+    <Content Include="Images\Gallery\P1000516.JPG" />
+    <Content Include="Images\Gallery\P1000517.JPG" />
+    <Content Include="Images\Gallery\P1000518.JPG" />
+    <Content Include="Images\Gallery\P1000519.JPG" />
+    <Content Include="Images\Gallery\P1000520.JPG" />
+    <Content Include="Images\Gallery\P1000521.JPG" />
+    <Content Include="Images\Gallery\P1000522.JPG" />
+    <Content Include="Images\Gallery\P1000523.JPG" />
+    <Content Include="Images\Gallery\P1000524.JPG" />
+    <Content Include="Images\Gallery\P1000525.JPG" />
+    <Content Include="Images\Gallery\P1000526.JPG" />
+    <Content Include="Images\Gallery\P1000527.JPG" />
+    <Content Include="Images\Gallery\P1000528.JPG" />
+    <Content Include="Images\Gallery\P1000529.JPG" />
+    <Content Include="Images\Gallery\P1000530.JPG" />
+    <Content Include="Images\Gallery\P1000531.JPG" />
+    <Content Include="Images\Gallery\P1000532.JPG" />
+    <Content Include="Images\Gallery\P1000533.JPG" />
+    <Content Include="Images\Gallery\P1000534.JPG" />
+    <Content Include="Images\Gallery\P1000535.JPG" />
+    <Content Include="Images\Gallery\P1000536.JPG" />
+    <Content Include="Images\Gallery\P1000537.JPG" />
+    <Content Include="Images\Gallery\P1000538.JPG" />
+    <Content Include="Images\Gallery\P1000539.JPG" />
+    <Content Include="Images\Gallery\P1000540.JPG" />
+    <Content Include="Images\Gallery\P1000541.JPG" />
+    <Content Include="Images\Gallery\P1000542.JPG" />
+    <Content Include="Images\Gallery\P1000543.JPG" />
+    <Content Include="Images\Gallery\P1000544.JPG" />
+    <Content Include="Images\Gallery\P1000545.JPG" />
+    <Content Include="Images\Gallery\P1000546.JPG" />
+    <Content Include="Images\Gallery\P1000547.JPG" />
+    <Content Include="Images\Gallery\P1000548.JPG" />
+    <Content Include="Images\Gallery\P1000549.JPG" />
+    <Content Include="Images\Gallery\P1000550.JPG" />
+    <Content Include="Images\Gallery\P1000551.JPG" />
+    <Content Include="Images\Gallery\P1000552.JPG" />
+    <Content Include="Images\Gallery\P1000553.JPG" />
+    <Content Include="Images\Gallery\P1000554.JPG" />
+    <Content Include="Images\Gallery\P1000555.JPG" />
+    <Content Include="Images\Gallery\P1000565.jpg" />
+    <Content Include="Images\Gallery\P1000569.jpg" />
+    <Content Include="Images\Gallery\P1000570.jpg" />
+    <Content Include="Images\Gallery\P1000571.jpg" />
+    <Content Include="Images\Gallery\P1000572.jpg" />
+    <Content Include="Images\Gallery\P1000573.jpg" />
+    <Content Include="Images\Gallery\P1000574.jpg" />
+    <Content Include="Images\Gallery\P1000575.jpg" />
+    <Content Include="Images\Gallery\P1000576.jpg" />
+    <Content Include="Images\Gallery\P1000577.jpg" />
+    <Content Include="Images\Gallery\P1000578.jpg" />
+    <Content Include="Images\Gallery\P1000579.jpg" />
+    <Content Include="Images\Gallery\P1000580.jpg" />
+    <Content Include="Images\Gallery\P1000581.jpg" />
+    <Content Include="Images\Gallery\P1000582.jpg" />
+    <Content Include="Images\Gallery\P1000583.jpg" />
+    <Content Include="Images\Gallery\P1000584.jpg" />
+    <Content Include="Images\Gallery\P1000585.jpg" />
+    <Content Include="Images\Gallery\P1000586.jpg" />
+    <Content Include="Images\Gallery\P1000587.jpg" />
+    <Content Include="Images\Gallery\P1000588.jpg" />
+    <Content Include="Images\Gallery\P1000589.jpg" />
+    <Content Include="Images\Gallery\P1000590.jpg" />
+    <Content Include="Images\Gallery\P1000591.jpg" />
+    <Content Include="Images\Gallery\P1000592.jpg" />
+    <Content Include="Images\Gallery\P1000593.jpg" />
+    <Content Include="Images\Gallery\P1000599.jpg" />
+    <Content Include="Images\Gallery\P1000600.jpg" />
+    <Content Include="Images\Gallery\P1000601.jpg" />
+    <Content Include="Images\Gallery\P1000602.jpg" />
+    <Content Include="Images\Gallery\P1000603.jpg" />
+    <Content Include="Images\Gallery\P1000604.jpg" />
+    <Content Include="Images\Gallery\P1000605.jpg" />
+    <Content Include="Images\Gallery\P1000606.jpg" />
+    <Content Include="Images\Gallery\P1000607.jpg" />
+    <Content Include="Images\Gallery\P1000608.jpg" />
+    <Content Include="Images\Gallery\P1000609.jpg" />
+    <Content Include="Images\Gallery\P1000610.jpg" />
+    <Content Include="Images\Gallery\P1000611.jpg" />
+    <Content Include="Images\Gallery\P1000612.jpg" />
+    <Content Include="Images\Gallery\P1000613.jpg" />
+    <Content Include="Images\Gallery\P1000617.jpg" />
+    <Content Include="Images\Gallery\P1000618.jpg" />
+    <Content Include="Images\Gallery\P1000619.jpg" />
+    <Content Include="Images\Gallery\P1000620.jpg" />
+    <Content Include="Images\Gallery\P1000621.jpg" />
+    <Content Include="Images\Gallery\P1000622.jpg" />
+    <Content Include="Images\Gallery\P1000623.jpg" />
+    <Content Include="Images\Gallery\P1000624.jpg" />
+    <Content Include="Images\Gallery\P1000625.jpg" />
+    <Content Include="Images\Gallery\P1000626.jpg" />
+    <Content Include="Images\Gallery\P1000627.jpg" />
+    <Content Include="Images\Gallery\P1000628.jpg" />
+    <Content Include="Images\Gallery\P1000629.jpg" />
+    <Content Include="Images\Gallery\P1000630.jpg" />
+    <Content Include="Images\Gallery\P1000631.jpg" />
+    <Content Include="Images\Gallery\P1000632.jpg" />
+    <Content Include="Images\Gallery\P1000633.jpg" />
+    <Content Include="Images\Gallery\P1000634.jpg" />
+    <Content Include="Images\Gallery\playground-mulch.jpg" />
+    <Content Include="Images\Gallery\project-1-1.jpg" />
+    <Content Include="Images\Gallery\project-1-2.jpg" />
+    <Content Include="Images\Gallery\project-1-3.jpg" />
+    <Content Include="Images\Gallery\project-10-1.jpg" />
+    <Content Include="Images\Gallery\project-10-2.jpg" />
+    <Content Include="Images\Gallery\project-11-1.jpg" />
+    <Content Include="Images\Gallery\project-11-2.jpg" />
+    <Content Include="Images\Gallery\project-12-1.jpg" />
+    <Content Include="Images\Gallery\project-12-2.jpg" />
+    <Content Include="Images\Gallery\project-12-3.jpg" />
+    <Content Include="Images\Gallery\project-13-1.jpg" />
+    <Content Include="Images\Gallery\project-13-2.jpg" />
+    <Content Include="Images\Gallery\project-14-1.jpg" />
+    <Content Include="Images\Gallery\project-14-2.jpg" />
+    <Content Include="Images\Gallery\project-15-1.jpg" />
+    <Content Include="Images\Gallery\project-15-2.jpg" />
+    <Content Include="Images\Gallery\project-16-1.jpg" />
+    <Content Include="Images\Gallery\project-17-1.jpg" />
+    <Content Include="Images\Gallery\project-17-2.jpg" />
+    <Content Include="Images\Gallery\project-18-1.jpg" />
+    <Content Include="Images\Gallery\project-18-2.jpg" />
+    <Content Include="Images\Gallery\project-19-1.jpg" />
+    <Content Include="Images\Gallery\project-2-1.jpg" />
+    <Content Include="Images\Gallery\project-2-2.jpg" />
+    <Content Include="Images\Gallery\project-20-1.jpg" />
+    <Content Include="Images\Gallery\project-20-2.jpg" />
+    <Content Include="Images\Gallery\project-20-3.jpg" />
+    <Content Include="Images\Gallery\project-21-1.jpg" />
+    <Content Include="Images\Gallery\project-21-2.jpg" />
+    <Content Include="Images\Gallery\project-21-3.jpg" />
+    <Content Include="Images\Gallery\project-22-1.jpg" />
+    <Content Include="Images\Gallery\project-22-2.jpg" />
+    <Content Include="Images\Gallery\project-22-3.jpg" />
+    <Content Include="Images\Gallery\project-23-1.jpg" />
+    <Content Include="Images\Gallery\project-23-2.jpg" />
+    <Content Include="Images\Gallery\project-24-1.jpg" />
+    <Content Include="Images\Gallery\project-24-2.jpg" />
+    <Content Include="Images\Gallery\project-24-3.jpg" />
+    <Content Include="Images\Gallery\project-25-1.jpg" />
+    <Content Include="Images\Gallery\project-25-2.jpg" />
+    <Content Include="Images\Gallery\project-26-1.jpg" />
+    <Content Include="Images\Gallery\project-26-2.jpg" />
+    <Content Include="Images\Gallery\project-3-1.jpg" />
+    <Content Include="Images\Gallery\project-3-2.jpg" />
+    <Content Include="Images\Gallery\project-3-3.jpg" />
+    <Content Include="Images\Gallery\project-4-1.jpg" />
+    <Content Include="Images\Gallery\project-4-2.jpg" />
+    <Content Include="Images\Gallery\project-4-3.jpg" />
+    <Content Include="Images\Gallery\project-5-1.jpg" />
+    <Content Include="Images\Gallery\project-5-2.jpg" />
+    <Content Include="Images\Gallery\project-6-1.jpg" />
+    <Content Include="Images\Gallery\project-6-2.jpg" />
+    <Content Include="Images\Gallery\project-7-1.jpg" />
+    <Content Include="Images\Gallery\project-7-2.jpg" />
+    <Content Include="Images\Gallery\project-8-1.jpg" />
+    <Content Include="Images\Gallery\project-8-2.jpg" />
+    <Content Include="Images\Gallery\project-8-3.jpg" />
+    <Content Include="Images\Gallery\project-9-1.jpg" />
+    <Content Include="Images\Gallery\project-9-2.jpg" />
+    <Content Include="Images\Gallery\project-9-3.jpg" />
+    <Content Include="Images\Gallery\project-9-4.jpg" />
+    <Content Include="Images\Gallery\red-mulch.jpg" />
+    <Content Include="Images\Gallery\rss.jpg" />
+    <Content Include="Images\Gallery\sand-stone.jpg" />
+    <Content Include="Images\Gallery\screened-loam.jpg" />
+    <Content Include="Images\Gallery\Snow_plow_large_92503PM.jpg" />
+    <Content Include="Images\Gallery\spruce-mulch.jpg" />
+    <Content Include="Images\Gallery\stone-dust.jpg" />
+    <Content Include="Images\Gallery\stump_removal_done_right_pics_05.jpg" />
+    <Content Include="Images\Gallery\washed-sand.jpg" />
+    <Content Include="Images\Gallery\white-stone.jpg" />
     <Content Include="Scripts\Blueimp\css\blueimp-gallery-indicator.css" />
     <Content Include="Scripts\Blueimp\css\blueimp-gallery-video.css" />
     <Content Include="Scripts\Blueimp\css\blueimp-gallery.css" />
@@ -300,6 +738,7 @@
     <Content Include="Scripts\Blueimp\js\demo.js" />
     <Content Include="Scripts\Blueimp\js\jquery.blueimp-gallery.js" />
     <Content Include="Scripts\Blueimp\js\jquery.blueimp-gallery.min.js" />
+    <Content Include="Scripts\bootstrap-multiselect.js" />
     <Content Include="Scripts\Bootstrap\css\bootstrap-theme.css.map" />
     <Content Include="Scripts\Bootstrap\css\bootstrap.css.map" />
     <Content Include="Scripts\Bootstrap\fonts\glyphicons-halflings-regular.eot" />
@@ -313,16 +752,33 @@
     <Content Include="Scripts\Bootstrap\js\bootstrap.js" />
     <Content Include="Scripts\Bootstrap\js\bootstrap.min.js" />
     <Content Include="Scripts\Bootstrap\js\npm.js" />
+    <EntityDeploy Include="NHExcavationDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NHExcavationDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="NHExcavationDBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NHExcavationDBModel.edmx</DependentUpon>
+      <LastGenOutput>NHExcavationDBModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="NHExcavationDBModel.edmx.diagram">
+      <DependentUpon>NHExcavationDBModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="NHExcavationDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NHExcavationDBModel.edmx</DependentUpon>
+      <LastGenOutput>NHExcavationDBModel.cs</LastGenOutput>
+    </Content>
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -378,17 +834,49 @@
     <Content Include="Views\Shared\ReCaptcha.cshtml" />
     <Content Include="Views\Home\Gallery.cshtml" />
     <Content Include="Views\Home\Testimonials.cshtml" />
+    <Content Include="Views\Home\Septic.cshtml" />
+    <Content Include="Views\Home\Hardscapes.cshtml" />
+    <Content Include="Views\Home\Excavation.cshtml" />
+    <Content Include="Views\Home\Landscaping.cshtml" />
+    <Content Include="Views\Home\Plowing.cshtml" />
+    <Content Include="Views\Home\Mulch.cshtml" />
+    <Content Include="Views\Home\Soil.cshtml" />
+    <Content Include="Views\Home\Crushed.cshtml" />
+    <Content Include="Views\Home\Decorative.cshtml" />
+    <Content Include="Views\Home\Gravel.cshtml" />
+    <Content Include="Views\Home\Materials.cshtml" />
+    <Content Include="Views\Home\Pricing.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Images\Thumbnails\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

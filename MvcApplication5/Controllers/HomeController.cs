@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 
@@ -38,6 +39,124 @@ namespace MvcApplication5.Controllers
         public ActionResult Gallery()
         {
             return View();
+        }
+
+        public ActionResult Plowing()
+        {
+            return View();
+        }
+
+        public ActionResult Landscaping()
+        {
+            return View();
+        }
+
+        public ActionResult Excavation()
+        {
+            return View();
+        }
+
+        public ActionResult Hardscapes()
+        {
+            return View();
+        }
+
+        public ActionResult Septic()
+        {
+            return View();
+        }
+
+        public ActionResult Materials()
+        {
+            return View();
+        }
+
+        public ActionResult Gravel()
+        {
+            return View();
+        }
+
+        public ActionResult Decorative()
+        {
+            return View();
+        }
+
+        public ActionResult Crushed()
+        {
+            return View();
+        }
+
+        public ActionResult Soil()
+        {
+            return View();
+        }
+
+        public ActionResult Mulch()
+        {
+            return View();
+        }
+
+        public ActionResult Pricing()
+        {
+            return View();
+        }
+
+        public ActionResult SendMail(Communication communication)
+        {
+            using(var db = new NHExcavationDBEntities())
+            {
+                communication.CreatedDate = DateTime.Now;
+                communication.CreateBy = 0;
+
+                db.Communications.Add(communication);
+                db.SaveChanges();
+            }
+
+            SendEmail(communication);
+
+            return Json(new { Result = "Success" });
+        }
+
+        private void SendConfirmationEmail(Communication communication)
+        {
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.1and1.com");
+
+            mail.From = new MailAddress("john@nhexcavation.com");
+            mail.To.Add(communication.Email);
+            mail.Subject = string.Format("Inquiry from {0} {1}", communication.FirstName, communication.LastName);
+            mail.Body = String.Format(
+                                        "{0} {1}\n" +
+                                        "{2}\n" +
+                                        "{3}\n" +
+                                        "Preferred Contact Method: {4}\n" +
+                                        "How did you find us? {5}\n" +
+                                        "Materials: {6}\n\n" +
+                                        "{7}", communication.FirstName, communication.LastName, communication.PhoneNumber, communication.Email, communication.ContactMethod, communication.DiscoveryMethod, communication.Materials, communication.Message);
+
+            SmtpServer.Port = 587;
+            SmtpServer.UseDefaultCredentials = false;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("noreply@nhexcavation.com", "yamaha1010");
+            SmtpServer.EnableSsl = true;
+            SmtpServer.Send(mail);
+        }
+
+        private void SendEmail(Communication communication)
+        {
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.1and1.com");
+
+            mail.From = new MailAddress("john@nhexcavation.com");
+            mail.To.Add(communication.Email);
+            mail.Subject = string.Format("Inquiry from {0} {1}", communication.FirstName, communication.LastName);
+            mail.Body = String.Format("{0} {1}\n{2}\n{3}\nPreferred Contact Method: {4}\nHow did you find us? {5}\n\n{6}", communication.FirstName, communication.LastName, communication.PhoneNumber, communication.Email, communication.ContactMethod, communication.DiscoveryMethod, communication.Message);
+
+            SmtpServer.Port = 587;
+            SmtpServer.UseDefaultCredentials = false;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("noreply@nhexcavation.com", "yamaha1010");
+            SmtpServer.EnableSsl = true;
+            SmtpServer.Send(mail);
+ 
         }
 
         public ActionResult Submit(string clientip, string challenge, string response)

@@ -1,31 +1,34 @@
-﻿
-<div class="sidebar-module">
+﻿<div class="sidebar-module">
     <h2>Free Estimates</h2>
-    <form class="form-horizontal">
-        <div class="form-group">
+    <form class="form-horizontal" id="myform">
+        <div class="form-group has-feedback">
             <div class="col-sm-12">
-                <input type="text" class="form-control" id="FirstName" placeholder="First Name" autofocus>
+                <input type="text" class="form-control" id="FirstName" name="FirstName" placeholder="First Name">
+                <span class="glyphicon form-control-feedback" id="FirstName1"></span>
+            </div>
+        </div>
+        <div class="form-group has-feedback">
+            <div class="col-sm-12">
+                <input type="text" class="form-control" id="LastName" name="LastName" placeholder="Last Name">
+                <span class="glyphicon form-control-feedback" id="LastName1"></span>
+            </div>
+        </div>
+        <div class="form-group has-feedback">
+            <div class="col-sm-12">
+                <input type="text" class="form-control" id="Email" name="Email" placeholder="Email">
+                <span class="glyphicon form-control-feedback" id="Email1"></span>
+            </div>
+        </div>
+        <div class="form-group has-feedback">
+            <div class="col-sm-12">
+                <input type="tel" class="form-control" id="PhoneNumber" name="PhoneNumber" placeholder="Phone Number">
+                <span class="glyphicon form-control-feedback" id="PhoneNumber1"></span>
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-12">
-                <input type="text" class="form-control" id="LastName" placeholder="Last Name">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-12">
-                <input type="email" class="form-control" id="Email" placeholder="Email">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-12">
-                <input type="tel" class="form-control" id="PhoneNumber" placeholder="Phone Number">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-12">
-                <select class="form-control">
-                    <option value=0 selected>-- Contact Method --</option>
+                <select class="form-control" id="ContactMethod" name="ContactMethod">
+                    <option value="" selected>-- Contact Method --</option>
                     <option value=1>Email</option>
                     <option value=2>Phone</option>
                 </select>
@@ -33,8 +36,8 @@
         </div>
         <div class="form-group">
             <div class="col-sm-12">
-                <select class="form-control">
-                    <option value=0 selected>-- How did you find us? --</option>
+                <select class="form-control" id="DiscoveryMethod" name="DiscoveryMethod">
+                    <option value="" selected>-- How did you find us? --</option>
                     <option value=1>Referral</option>
                     <option value=2>Google</option>
                     <option value=3>Yahoo!</option>
@@ -45,7 +48,18 @@
         </div>
         <div class="form-group">
             <div class="col-sm-12">
-                <textarea class="form-control" rows="5" id="Message" placeholder="Message"></textarea>
+                <select id="Materials" multiple="multiple" name="Materials">
+                    <option value="Bark Mulch">Bark Mulch</option>
+                    <option value="Stone">Stone</option>
+                    <option value="Soil">Soil</option>
+                    <option value="Gravel">Gravel</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group has-feedback">
+            <div class="col-sm-12">
+                <textarea class="form-control" rows="5" id="Message" name="Message" placeholder="Message"></textarea>
+                <span class="glyphicon form-control-feedback" id="Message1"></span>
             </div>
         </div>
         <div class="form-group">
@@ -55,4 +69,19 @@
         </div>
         <button type="button" class="btn btn-lg btn-primary" id="btnSubmit">Send</button>
     </form>
+    <div id="myModal" class="modal fade bs-example-modal-lg in" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myLargeModalLabel">Thank you!<a class="anchorjs-link" href="#myLargeModalLabel"><span class="anchorjs-icon"></span></a></h4>
+                </div>
+                <div class="modal-body">
+                    You should receive a confirmation email shortly. We will respond to you inquiry as soon as possible. Thank you
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
+
 </div>
